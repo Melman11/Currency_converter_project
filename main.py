@@ -1,7 +1,6 @@
 from coins import USD, ILS, EUR
-import subprocess
 import tkinter as tk
-
+import subprocess
 results_list = []
 
 
@@ -117,28 +116,23 @@ def end_screen():
 
     # *optional to also open the file in notepad*
     # filepath = "C:/Users/nivis/PycharmProjects/Currency_converter_project/results.txt"
-    # command = f"notepad {filepath}"
-    # subprocess.run(command, shell=True)
+    # notepad = f"notepad {filepath}"
+    # subprocess.run(notepad, shell=True)
 
 
 def display_file_content():
-    # Open the file and read its contents
     file_path = "C:/Users/nivis/PycharmProjects/Currency_converter_project/results.txt"
     with open(file_path, "r") as file:
-        content = file.read()
-
-    # Create a Tkinter window
+        text = file.read()
+    # create a Tkinter window
     window = tk.Tk()
     window.title("File Content")
-
-    # Create a text widget and add it to the window
+    # create a text widget and add it to the window
     text_widget = tk.Text(window)
     text_widget.pack()
-
-    # Insert the file content into the text widget
-    text_widget.insert(tk.END, content)
-
-    # Start the Tkinter event loop
+    # insert the file content into the text widget
+    text_widget.insert(tk.END, text)
+    # mainloop
     window.mainloop()
 
 
