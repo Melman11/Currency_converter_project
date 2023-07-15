@@ -1,4 +1,5 @@
 from coins import USD, ILS, EUR
+import subprocess
 
 results_list = []
 
@@ -7,8 +8,8 @@ results_list = []
 def get_user_input():
     while True:  # validating the users input
         try:
-            user_choice = input("Please choose an option (1/2):\n1. Dollars to Shekels\n2. Shekels to Dollars\n "
-                                "Shekels to Euro")
+            user_choice = input("Please choose an option (1/2):\n1. Dollars to Shekels\n2. Shekels to Dollars\n"
+                                "3. Shekels to Euro")
             assert user_choice in ["1", "2", "3"]
             return user_choice
 
@@ -33,7 +34,8 @@ def usd_to_ils():
     usd = USD()
     # converting to ILS
     converted_value = usd.calculate(value_to_convert)
-    result = f"{value_to_convert} USD equals {converted_value} ILS"
+    result = f"{value_to_convert} USD equals {converted_value} ILS"  # result object
+    # appending to the result list
     results_list.append(result)
     # printing the results
     print(f"{value_to_convert} United States Dollar equals {converted_value} Israeli new shekels.")
@@ -54,10 +56,12 @@ def ils_to_usd():
     ils = ILS()
     # converting to USD
     converted_value = ils.calculate(value_to_convert)
-    result = f"{value_to_convert} ILS equals {converted_value} USD"
+    result = f"{value_to_convert} ILS equals {converted_value} USD"  # result object
+    # appending to the result list
     results_list.append(result)
     # printing the results
     print(f"{value_to_convert} Israeli new shekels equals {converted_value} United States Dollar.")
+
 
 # converts ILS to EUR
 def ils_to_eur():
@@ -74,7 +78,8 @@ def ils_to_eur():
     eur = EUR()
     # converting to ILS
     converted_value = eur.calculate(value_to_convert)
-    result = f"{value_to_convert} ILS equals {converted_value} EUR"
+    result = f"{value_to_convert} ILS equals {converted_value} EUR"  # result object
+    # appending to the result list
     results_list.append(result)
     # printing the results
     print(f"{value_to_convert} Israeli new shekels equals {converted_value} Euro's.")
@@ -86,8 +91,8 @@ def keep_playing():
         try:
             # asks the user if he wants to start over
             continue_playing = input("Do you want to start over? (Y/N) ")
-            assert continue_playing.lower() in ["y", "n"]
-            if continue_playing.lower() == "y":
+            assert continue_playing.lower() in ["y", "yes", "n", "no"]
+            if continue_playing.lower() in ["y", "yes"]:
                 print("++++++++++++++++")
                 print("Currency converter")
                 return True  # program continues
@@ -108,6 +113,10 @@ def end_screen():
     text_file = open("results.txt", "w+")
     text_file.write(f"All the results: {results_list}")
     text_file.close()
+    # opens the file in notepad
+    filepath = "C:/Users/nivis/PycharmProjects/Currency_converter_project/results.txt"
+    command = f"notepad {filepath}"
+    subprocess.run(command, shell=True)
 
 
 def main():
@@ -119,6 +128,8 @@ def main():
             usd_to_ils()
         elif currency_choice == "2":  # ILS to USD
             ils_to_usd()
+        elif currency_choice == "3":  # ILS to EUR
+            ils_to_eur()
 
         # prints previous results
         print(f"Previous results: {results_list}")

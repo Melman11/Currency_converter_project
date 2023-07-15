@@ -59,8 +59,8 @@ class EUR:
         # returns default value if API isn't available
         except:
             print("Could not get rate from API, using default rate...")
-            return 4.23
+            return 0.25
 
-    # calculate the USD value with the users input
+    # calculate the EUR value with the users input
     def calculate(self, user_input):
         return self.get_value() * user_input
