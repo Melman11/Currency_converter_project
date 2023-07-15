@@ -1,5 +1,6 @@
 from coins import USD, ILS, EUR
 import subprocess
+import tkinter as tk
 
 results_list = []
 
@@ -113,10 +114,32 @@ def end_screen():
     text_file = open("results.txt", "w+")
     text_file.write(f"All the results: {results_list}")
     text_file.close()
-    # opens the file in notepad
-    filepath = "C:/Users/nivis/PycharmProjects/Currency_converter_project/results.txt"
-    command = f"notepad {filepath}"
-    subprocess.run(command, shell=True)
+
+    # *optional to also open the file in notepad*
+    # filepath = "C:/Users/nivis/PycharmProjects/Currency_converter_project/results.txt"
+    # command = f"notepad {filepath}"
+    # subprocess.run(command, shell=True)
+
+
+def display_file_content():
+    # Open the file and read its contents
+    file_path = "C:/Users/nivis/PycharmProjects/Currency_converter_project/results.txt"
+    with open(file_path, "r") as file:
+        content = file.read()
+
+    # Create a Tkinter window
+    window = tk.Tk()
+    window.title("File Content")
+
+    # Create a text widget and add it to the window
+    text_widget = tk.Text(window)
+    text_widget.pack()
+
+    # Insert the file content into the text widget
+    text_widget.insert(tk.END, content)
+
+    # Start the Tkinter event loop
+    window.mainloop()
 
 
 def main():
@@ -135,6 +158,8 @@ def main():
         print(f"Previous results: {results_list}")
         if not keep_playing():  # if the user choose to not start over
             end_screen()  # program terminated
+            # display the file content using Tkinter
+            display_file_content()
             break
 
 
