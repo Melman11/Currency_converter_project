@@ -1,4 +1,4 @@
-from coins import USD, ILS
+from coins import USD, ILS, EUR
 
 results_list = []
 
@@ -7,8 +7,9 @@ results_list = []
 def get_user_input():
     while True:  # validating the users input
         try:
-            user_choice = input("Please choose an option (1/2):\n1. Dollars to Shekels\n2. Shekels to Dollars\n")
-            assert user_choice in ["1", "2"]
+            user_choice = input("Please choose an option (1/2):\n1. Dollars to Shekels\n2. Shekels to Dollars\n "
+                                "Shekels to Euro")
+            assert user_choice in ["1", "2", "3"]
             return user_choice
 
         except ValueError:
@@ -32,7 +33,8 @@ def usd_to_ils():
     usd = USD()
     # converting to ILS
     converted_value = usd.calculate(value_to_convert)
-    results_list.append(converted_value)
+    result = f"{value_to_convert} USD equals {converted_value} ILS"
+    results_list.append(result)
     # printing the results
     print(f"{value_to_convert} United States Dollar equals {converted_value} Israeli new shekels.")
 
@@ -52,9 +54,30 @@ def ils_to_usd():
     ils = ILS()
     # converting to USD
     converted_value = ils.calculate(value_to_convert)
-    results_list.append(converted_value)
+    result = f"{value_to_convert} ILS equals {converted_value} USD"
+    results_list.append(result)
     # printing the results
     print(f"{value_to_convert} Israeli new shekels equals {converted_value} United States Dollar.")
+
+# converts ILS to EUR
+def ils_to_eur():
+    while True:  # validating the users input
+        try:
+            # asks for an amount
+            value_to_convert = float(input("Please enter an amount to convert: "))
+            assert type(value_to_convert) is float
+            break
+        except ValueError:
+            print("Invalid choice, please try again.")
+        except AssertionError:
+            print("Invalid choice, please try again.")
+    eur = EUR()
+    # converting to ILS
+    converted_value = eur.calculate(value_to_convert)
+    result = f"{value_to_convert} ILS equals {converted_value} EUR"
+    results_list.append(result)
+    # printing the results
+    print(f"{value_to_convert} Israeli new shekels equals {converted_value} Euro's.")
 
 
 # checks if user wants to keep playing
